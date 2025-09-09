@@ -221,18 +221,16 @@ export default function App() {
           
           return;
         }
-        
+
         // 在每次重试前检查网络状态
-if (networkStatus === 'offline') {
-  addSystemMessage('Network offline detected during retry. Waiting for connection...', 'warning');
-  
-  // 等待网络恢复
-  while (networkStatus === 'offline') {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // 每秒检查一次
-  }
-  
-  addSystemMessage('Network restored. Continuing...', 'info');
-}
+      if (networkStatus === 'offline') {
+        addSystemMessage('Network offline detected during retry. Waiting for connection...', 'warning');
+        // 等待网络恢复
+        while (networkStatus === 'offline') {
+          await new Promise(resolve => setTimeout(resolve, 1000)); // 每秒检查一次
+        }
+        addSystemMessage('Network restored. Continuing...', 'info');
+      }
 
         // 准备重试
         currentRetry++;
